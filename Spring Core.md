@@ -1,250 +1,258 @@
-## **What is spring?**
 
 
+# Spring Framework Notes
 
-* **Spring is open source:** while building any web application/networking app we do not need to purchase any license from any vendor(like apache). It is free
+## What is Spring?
 
+**Spring** is a **Java-based open-source framework** used to build **enterprise and web applications** easily.
 
+### Key Characteristics
 
-* **Light weight:** We can use any particular of all the spring modules to build an app.
+* **Open Source**
+  While building web or networking applications, we do not need to purchase any license from any vendor. Spring is completely free.
 
-&nbsp;
+* **Lightweight**
+  Developers can use only the required modules of Spring instead of the entire framework.
 
-* **Java based framework** 
+* **Java-Based Framework**
+  Spring is built on Java and widely used for enterprise application development.
 
+---
 
+# Spring Modules
 
+1. **Spring Core**
 
+2. **Spring JDBC**
 
-**Spring modules**
+3. **Spring Data JPA**
 
-**==================**
+4. **Spring ORM**
 
+5. **Spring Web MVC**
 
+6. **Spring Boot**
+   Provides **auto-configuration with an embedded server**.
 
-1\. Spring Core
+7. **Spring REST API**
+   Used to implement **RESTful web services** for distributed applications using **JSON or XML** formats.
 
-2\. Spring JDBC
+8. **Spring AOP (Aspect Oriented Programming)**
 
-3\. Spring Data JPA
+9. **Spring Security**
 
-4\. Spring ORM
+10. **Spring Cloud**
 
-5\. Spring Web MVC
+---
 
-6\. Spring Boot: It is auto configuration of embedded server.
+# Why Spring?
 
-7\. Spring REST API: Used to implement restful webservices for distributed application(Application built with different language). Using XML,JSON format
+1. Open Source
+2. Lightweight
+3. Reduces the complexity while developing applications
 
-8\. Spring AoP (Aspect Oriented Programming)
+---
 
-9\. Spring Security
+## Complexities Without Spring
 
-10\. Spring cloud
+While developing applications manually, developers must handle:
 
+* Establishing database connection
+* Creating the platform/environment
+* Beginning the transaction
+* Committing the transaction
+* Creating objects of classes
 
+Spring helps **reduce these complexities**.
 
+---
 
+# Spring Core
 
-## **Why Spring?**
+The **Spring Core module** provides the foundation of the framework and introduces:
 
+* **IoC (Inversion of Control)**
+* **Dependency Injection (DI)**
 
+---
 
-1. &nbsp;Open Source 
-2. &nbsp;Light weight
-3. **\*\* It is used to reduce the complexities faced while developing the application.**
+# IoC – Inversion of Control
 
-&nbsp;	
+IoC is a design principle where **the control of object creation and dependency management is transferred from the programmer to the Spring container**.
 
+---
 
+## Task Comparison
 
-&nbsp;	**------COMPLEXITIES----------**
+| IoC Container Tasks                           | JVM Tasks                                     |
+| --------------------------------------------- | --------------------------------------------- |
+| Creation of **Bean** of the class             | Creation of **Object** of the class           |
+| Injecting values into **Primitive types**     | Injecting values into **Primitive types**     |
+| Injecting values into **Non-Primitive types** | Injecting values into **Non-Primitive types** |
+| Managing the **Bean**                         | Managing the **Object**                       |
+| **Bean Life Cycle Management**                | Execution of code line by line                |
 
-&nbsp;	\* Establish Connection
+---
 
-&nbsp;	\* Create platform
+# Object vs Bean
 
-&nbsp;	\* Begin the transaction
+### Object
 
-&nbsp;	\* Commit the transaction
+If an instance of a class is created **by the JVM using the `new` keyword**, it is called an **Object**.
 
-&nbsp;	\* Creation of object of the class
+### Bean
 
+If an object is created **by the Spring IoC container without using the `new` keyword**, it is called a **Bean**.
 
+---
 
+# Why is it called Inversion of Control?
 
+Because Spring **reverses the traditional way of object creation**.
 
-#### **Spring Core**
+Traditional approach:
 
+```
+Developer creates objects using new keyword
+```
 
+Spring approach:
 
-Basic module of Spring which give complete info about the Ioc And Dependency Injection
+```
+Spring Container creates and manages Beans
+```
 
+---
 
+# IoC Containers
 
-IoC-Inversion of Controller
+Spring provides **three IoC containers**.
 
+---
 
+## 1. BeanFactory (Interface)
 
-##### 	**Task of IOC			Task of JVM**
+* The **root interface** of the Spring IoC container.
+* Used mainly for **standalone applications**.
+* Performs the **5 tasks of IoC container**.
+* Supports **XML configuration only**.
 
-**---------------------------------------------------------------------------------------------------**
+---
 
-&nbsp;						|	
+## 2. ApplicationContext (Interface)
 
-Creation of the **Bean** of the class		| Creation of the **object** of the class
+* **Extends BeanFactory**
+* More advanced container.
+* Used for **enterprise and standalone applications**.
+* Supports:
 
-&nbsp;						|
+  * XML configuration
+  * Java configuration
+  * Annotation configuration
 
-Injecting the values into the Primitive		| Injecting the values into the Primitive
+---
 
-&nbsp;						|
+## 3. WebApplicationContext (Interface)
 
-Injecting the values into the Non Primitive	| Injecting the values into the Non Primitive
+* **Extends ApplicationContext**
+* Used specifically for **web applications**.
 
-&nbsp;						|
+---
 
-Managing the **Bean				|** Managing the **Object**
+# Ways to Create Beans
 
-						**|**
+Beans can be created using the following configurations:
 
-**Bean Life cycle					| Execution of line by line code**
+1. **XML Configuration**
+2. **Java-Based Configuration**
+3. **Annotation-Based Configuration**
 
+Additional configurations used in **Spring Boot**:
 
+4. `application.properties`
+5. `application.yml`
 
+---
 
+# BeanFactory Implementation
 
+## XmlBeanFactory (Class)
 
+* Implementation class of **BeanFactory**
+* Used to **upcast the object of BeanFactory**
+* Used to **load XML configuration**
 
+Example:
 
+```
+BeanFactory factory = new XmlBeanFactory(resource);
+```
 
-##### &nbsp;**Object :** If the object or instance is created by the JVM we call it **Object.**
+---
 
-##### &nbsp;**Bean :** If the object is created without using new keyword by the IoC container we call it as **Bean.**
+# ApplicationContext Implementations
 
+## 1. FileSystemXmlApplicationContext
 
+* Implementation of **ApplicationContext**
+* Loads **XML configuration from the file system (outside the project)**.
 
+---
 
+## 2. ClassPathXmlApplicationContext
 
-**Why the container is named as inversion of controller?**
+* Implementation of **ApplicationContext**
+* Loads **XML configuration from the project classpath**.
 
+Example:
 
+```
+ApplicationContext context =
+new ClassPathXmlApplicationContext("applicationContext.xml");
+```
 
--> Because it reverses the traditional way of creating the object, managing the objects**(Beans specifically)** by using **new keyword.**
+---
 
+## 3. AnnotationConfigApplicationContext
 
+* Implementation of **ApplicationContext**
+* Used for **Java configuration and annotation-based configuration**.
 
-**-------------------------------**
+Example:
 
-###### **3 IoC Containers**
+```
+ApplicationContext context =
+new AnnotationConfigApplicationContext(AppConfig.class);
+```
 
-**-------------------------------**
+---
 
-* **BeanFactory (I) :** It is a supermost interface used to develop stand alone app(that runs without internet on the local machine), to perform 5 Task of IoC container and it understands
+# Spring Context Dependency
 
-&nbsp;		     only xml Configuration.
+To use the **IoC container**, we must include the **Spring Context dependency**.
 
+Example (Maven):
 
+```xml
+<dependency>
+ <groupId>org.springframework</groupId>
+ <artifactId>spring-context</artifactId>
+ <version>6.x.x</version>
+</dependency>
+```
 
-* **ApplicationContext (I) (extends BeanFactory):** It is a extension of Beanfactory interface used to develop stand alone app(that runs without internet on the local machine), to perform 5 						  Task of IoC container and it understands all three Configurations.
+---
 
+# Summary
 
+Spring simplifies enterprise application development by providing:
 
-* **WebApplicationContext (I) (extends ApplicationContext):** It is a extension of Beanfactory interface used to develop stand alone app(that runs without internet on the local machine), to 							   perform 5 Task of IoC container and it understands all three Configurations. 
+* Dependency Injection
+* IoC Container
+* Modular Architecture
+* Integration with databases, security, and cloud services
 
+It significantly **reduces boilerplate code and complexity** in Java applications.
 
-
-###### 
-
-###### 
-
-###### **How many ways we can create Bean?**
-
-
-
-We can use anyone of the following: 
-
-
-
-* XML configuration
-* Java Based Configuration
-* Annotation Configuration 
-* **More 2 can be used for SpringBoot:** application.properties, application.xml
-
-
-
-**------------------------------**
-
-##### **BeanFactory(I)**
-
-**------------------------------**
-
-###### **Implementation class:** 
-
-
-
-		**XmlBeanFactory(C)** [**\[https://media.geeksforgeeks.org/wp-content/uploads/20260227111947198575/DifferenceBetweenBeanFactory-andApplicationContext.webp]**]([https://media.geeksforgeeks.org/wp-content/uploads/20260227111947198575/DifferenceBetweenBeanFactory-andApplicationContext.webp])
-
-
-
-* It is the implementation class of BeanFactory.
-* It is used to upcast the object of BeanFactory.
-* It is used to show the path of XML configuration. 
-
-
-
-**--------------------------------**
-
-##### **ApplicationContext(I)**
-
-**--------------------------------**
-
-###### **Implementation class:**
-
-
-
-		**FileSystemXmlApplicationContext(C)** [**\[https://media.geeksforgeeks.org/wp-content/uploads/20260227111947198575/DifferenceBetweenBeanFactory-andApplicationContext.webp]**](https://media.geeksforgeeks.org/wp-content/uploads/20260227111947198575/DifferenceBetweenBeanFactory-andApplicationContext.webp)
-
-
-
-* It is the implementation class of ApplicationContext.
-* It is used to upcast the object of ApplicationContext.
-* It is used to show the XML configuration, which is present inside the system but outside the project.
-
-
-
-
-
-		**ClassPathXmlApplicationContext(C)** 
-
-
-
-* It is the implementation class of ApplicationContext.
-* It is used to upcast the object of ApplicationContext.
-* It is used to show the path of  XML configuration, which is present inside the project.
-
-
-
-&nbsp;		
-
-
-
-&nbsp;	      **AnnotaionConfigApplicationContext(C)**
-
-
-* It is the implementation class of ApplicationContext.
-* It is used to upcast the object of ApplicationContext.
-* It is used to show the path of Component class (Annotation and java based configuration). 
-
-
-
-
-
-To get the IoC container of the implementation classes we need to import Spring context dependency.
-
-
-
-
-
-
+---
 

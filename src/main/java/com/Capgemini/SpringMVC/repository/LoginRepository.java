@@ -8,5 +8,6 @@ import com.Capgemini.SpringMVC.model.UserEntity;
 @Repository 
 public interface LoginRepository extends JpaRepository<UserEntity, Integer> {
 	
-	UserEntity findByUsernameAndPassword(String username, String password);
+	UserEntity find(String username);
+	
 }

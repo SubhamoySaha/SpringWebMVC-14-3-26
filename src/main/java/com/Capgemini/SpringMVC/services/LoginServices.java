@@ -30,8 +30,8 @@ public class LoginServices {
 	public boolean validateUser(String username, String password) {
 		// In a real application, you would retrieve the user from the database and compare the hashed password.
 		// This is just a placeholder implementation.
-		UserEntity user = loginRepository.findByUsernameAndPassword(username, password);
-		if(user != null) {
+		UserEntity user = loginRepository.find(username);
+		if(user != null && user.getPassword().equals(password)) {
 			return true; // User found, validation successful
 		}
 		return false; // Assume validation is successful for demonstration purposes
