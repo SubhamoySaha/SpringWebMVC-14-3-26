@@ -7,12 +7,7 @@
 </head>
 <body bgcolor="powderblue">
 	<h2 style="text-align:center;">Login</h2>
-	<c:if test="${not empty msg}">
-		<p style="color:green; text-align:center">${msg}</p>
-	</c:if>
-	<c:if test="${not empty error}">
-		<p style="color:red; text-align:center">${error}</p>
-	</c:if>
+	
 	<form action="login" method="post">
 		<table align="center" border=1 style="margin-top: 20px">
 			<tr>
