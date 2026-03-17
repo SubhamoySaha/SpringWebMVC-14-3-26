@@ -5,19 +5,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.Capgemini.SpringMVC.model.UserEntity;
+import com.Capgemini.SpringMVC.entity.UserEntity;
 import com.Capgemini.SpringMVC.services.LoginServices;
-
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 
 @Controller
 public class LoginController {
+
+   
 	
 	@Autowired
 	LoginServices loginServices;
-	
+
+
+   
 
 	
 	
@@ -28,7 +32,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String validate(String username, String password) {
+	public String validate(String username, String password, HttpServletRequest request,HttpServletResponse response) {
 			// simple placeholder validation: accept any non-empty username/password
 
 		String page=null;
@@ -37,13 +41,24 @@ public class LoginController {
 		boolean flag=loginServices.validateUser(username, password);
 		if(flag) {
 			page="welcome.jsp";
+			try {
+				request.getRequestDispatcher("/allemp").forward(request, response);
+				
+				} catch (Exception e) {
+					e.printStackTrace();
+					
+			}
 		}
 		else {
 			page="login.jsp";
 		}
 		return page;
 	}
-
+	
+	@GetMapping("/addemp")
+	public String addEmp() {
+		return "addemp.jsp";
+	}
 	
 	@GetMapping("/register")
 	public String showRegister() {

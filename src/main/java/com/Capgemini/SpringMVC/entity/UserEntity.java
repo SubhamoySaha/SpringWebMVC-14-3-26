@@ -1,4 +1,4 @@
-package com.Capgemini.SpringMVC.model;
+package com.Capgemini.SpringMVC.entity;
 
 import jakarta.persistence.*;
 

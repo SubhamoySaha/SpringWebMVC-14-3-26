@@ -1,13 +1,13 @@
-package com.Capgemini.SpringMVC.repository;
+package com.Capgemini.SpringMVC.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.Capgemini.SpringMVC.model.UserEntity;
+import com.Capgemini.SpringMVC.entity.UserEntity;
 
 @Repository 
 public interface LoginRepository extends JpaRepository<UserEntity, Integer> {
 	
-	UserEntity find(String username);
+	UserEntity findByUsername(String username);
 	
 }

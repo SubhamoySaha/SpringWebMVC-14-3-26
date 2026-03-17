@@ -2,8 +2,8 @@ package com.Capgemini.SpringMVC.services;
 
 
 
-import com.Capgemini.SpringMVC.model.UserEntity;
-import com.Capgemini.SpringMVC.repository.LoginRepository;
+import com.Capgemini.SpringMVC.entity.UserEntity;
+import com.Capgemini.SpringMVC.dao.LoginRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class LoginServices {
 	public boolean validateUser(String username, String password) {
 		// In a real application, you would retrieve the user from the database and compare the hashed password.
 		// This is just a placeholder implementation.
-		UserEntity user = loginRepository.find(username);
+		UserEntity user = loginRepository.findByUsername(username);
 		if(user != null && user.getPassword().equals(password)) {
 			return true; // User found, validation successful
 		}
