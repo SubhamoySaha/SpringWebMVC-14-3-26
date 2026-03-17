@@ -1,10 +1,13 @@
 package com.Capgemini.SpringMVC.entity;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Employee {
@@ -15,6 +18,8 @@ public class Employee {
 	
 	
 	@Column(name="emp_id")
+	@NotBlank(message = "Employee ID is required")
+	@UniqueElements(message = "Employee ID must be unique")
 	private String empId;
 	
 	@Column(name="emp_name")
@@ -24,7 +29,8 @@ public class Employee {
 	private String email;
 	
 	@Column(name="emp_contact_no")
-	private int contactNo;
+	
+	private long contactNo;
 	
 	@Column(name="emp_city")
 	private String city;
@@ -35,7 +41,7 @@ public class Employee {
 
 	}
 
-	public Employee(String empId, String name, String email, int contactNo, String city) {
+	public Employee(String empId, String name, String email, long contactNo, String city) {
 		this.empId = empId;
 		this.name = name;
 		this.email = email;
@@ -75,11 +81,11 @@ public class Employee {
 		this.email = email;
 	}
 
-	public int getContactNo() {
+	public long getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(int contactNo) {
+	public void setContactNo(long contactNo) {
 		this.contactNo = contactNo;
 	}
 

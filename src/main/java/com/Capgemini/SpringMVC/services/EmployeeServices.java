@@ -20,5 +20,7 @@ public class EmployeeServices {
 	public void addEmployee(Employee employee) {
 		employeeRepository.save(employee);
 	}
-
+	public void deleteEmployee(int id) {
+		employeeRepository.deleteById(id);
+	}
 }

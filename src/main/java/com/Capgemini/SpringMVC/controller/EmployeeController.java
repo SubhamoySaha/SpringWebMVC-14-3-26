@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class EmployeeController {
 		employee.setName(name);
 		employee.setEmail(email);
 		employee.setCity(city);
-		employee.setContactNo(Integer.parseInt(contactNoStr));
+		employee.setContactNo(Long.parseLong(contactNoStr));
 		
 		
 		System.out.println("Creating employee: " + employee.getName());
@@ -60,7 +61,17 @@ public class EmployeeController {
 		return "redirect:/allemp";
 	}
 	
+	@GetMapping("/deleteemp")
+	public String delete(@RequestParam("id") int id) {
+		employeeServices.deleteEmployee(id);
+		return "redirect:/allemp";
+	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/login.jsp";
+	}
 //	@GetMapping("/employees")
 //	public List<Employee> getAllEmployees() {
 //		return employeeServices.getAllEmployees();
