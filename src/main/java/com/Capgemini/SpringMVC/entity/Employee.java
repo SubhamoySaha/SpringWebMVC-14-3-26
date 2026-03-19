@@ -17,9 +17,7 @@ public class Employee {
 	private int id;
 	
 	
-	@Column(name="emp_id")
-	@NotBlank(message = "Employee ID is required")
-	@UniqueElements(message = "Employee ID must be unique")
+	@Column(unique = true, nullable = false)
 	private String empId;
 	
 	@Column(name="emp_name")

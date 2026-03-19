@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.Capgemini.SpringMVC.entity.Employee;
 import com.Capgemini.SpringMVC.services.EmployeeServices;
@@ -77,6 +78,56 @@ public class EmployeeController {
 //		return employeeServices.getAllEmployees();
 //			
 //	}
+	
+	@GetMapping("/viewemp")
+	public String viewEmployee(@RequestParam ("id") int id, HttpServletRequest request)
+	{
+		Optional<Employee> emp=employeeServices.getEmployeeById(id);
+		if(emp.isPresent()) {
+			Employee e = emp.get();
+			System.out.println("Viewing employee: " + e.getName());
+			request.setAttribute("employee", e);
+			return "viewemp.jsp";
+		}
+		return "redirect:/allemp";
+	}
+	
+	@GetMapping("/editemp")
+	public String editEmployeeForm(@RequestParam("id") int id, HttpServletRequest request) {
+		Optional<Employee> emp = employeeServices.getEmployeeById(id);
+		if(emp.isPresent()) {
+			Employee e = emp.get();
+			System.out.println("Editing employee: " + e.getName());
+			request.setAttribute("employee", e);
+			return "editemp.jsp";
+		}
+		return "redirect:/allemp";
+	}
+	
+	@PostMapping("/editemp")
+	public String updateEmployee(HttpServletRequest request) {
+		String idStr = request.getParameter("id");
+		String empId = request.getParameter("empId");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String contactNoStr = request.getParameter("contactNo");
+		String city = request.getParameter("city");
+		
+		int id = Integer.parseInt(idStr);
+		
+		Employee employee = new Employee();
+		employee.setId(id);
+		employee.setEmpId(empId);
+		employee.setName(name);
+		employee.setEmail(email);
+		employee.setContactNo(Long.parseLong(contactNoStr));
+		employee.setCity(city);
+		
+		System.out.println("Updating employee: " + employee.getName());
+		employeeServices.updateEmployee(employee);
+		
+		return "redirect:/viewemp?id=" + id;
+	}
 	
 	
 }
